@@ -36,12 +36,22 @@ module ToXls
         row_index = 0
 
         if headers_should_be_included?
+          if @options.has_key?(:fixed_columns) && @options[:fixed_columns]
+            columns.each_with_index do |col, idx_col|
+              sheet.column(idx_col).width = col.to_s.strip.size if sheet.column(idx_col).width < col.to_s.strip.size
+            end
+          end
           apply_format_to_row(sheet.row(0), @header_format)
           fill_row(sheet.row(0), headers)
           row_index = 1
         end
 
         @array.each do |model|
+          if @options.has_key?(:fixed_columns) && @options[:fixed_columns]
+            columns.each_with_index do |col, idx_col|
+              sheet.column(idx_col).width = model.send(col).to_s.strip.size if sheet.column(idx_col).width < model.send(col).to_s.strip.size
+            end
+          end
           row = sheet.row(row_index)
           apply_format_to_row(row, @cell_format)
           fill_row(row, columns, model)

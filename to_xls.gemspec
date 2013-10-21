@@ -5,7 +5,7 @@ require "to_xls/version"
 Gem::Specification.new do |s|
   s.name        = "to_xls"
   s.version     = ToXls::VERSION
-  s.authors     = ["Enrique Garcia Cota", "Francisco de Juan", "Sergio Díaz Álvarez"]
+  s.authors     = ["Enrique Garcia Cota", "Francisco de Juan", "Sergio Díaz Álvarez", "Jaime Giraldo Jiménez"]
   s.email       = %q{egarcia@splendeo.es}
   s.homepage    = "https://github.com/splendeo/to_xls"
   s.summary     = %q{to_xls for Enumerations}
