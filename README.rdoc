@@ -11,6 +11,7 @@ It is (very slightly) oriented towards exporting ActiveRecord sets, but it can b
   @users.to_xls                        # by default, it exports using the "attributes" field on the first item of the collection
   @users.to_xls(:name => "Users")      # specifies the Sheet name (by default Sheet1)
   @users.to_xls(:headers => false)     # don't include headers
+  @users.to_xls(:fixed_columns => true) # better width to columns
   @users.to_xls(:columns => [:name, :role]) # include only these columns, on this order
   @users.to_xls(:columns => [:name, {:company => [:name, :address]}]) # able to pick associations/called methods
   @users.to_xls(:columns => [:name, {:company => [:name, :address]}], :headers => ['Name', 'Company', 'Address']) # provide better names for the associated columns
