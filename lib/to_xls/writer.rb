@@ -38,7 +38,7 @@ module ToXls
         if headers_should_be_included?
           if @options.has_key?(:fixed_columns) && @options[:fixed_columns]
             columns.each_with_index do |col, idx_col|
-              sheet.column(idx_col).width = col.to_s.strip.size if sheet.column(idx_col).width < col.to_s.strip.size
+              sheet.column(idx_col).width = col.to_s.strip.size if (col.is_a?(Symbol) || col.is_a?(String)) && !col.nil? && sheet.column(idx_col).width < col.to_s.strip.size
             end
           end
           apply_format_to_row(sheet.row(0), @header_format)
@@ -49,7 +49,7 @@ module ToXls
         @array.each do |model|
           if @options.has_key?(:fixed_columns) && @options[:fixed_columns]
             columns.each_with_index do |col, idx_col|
-              sheet.column(idx_col).width = model.send(col).to_s.strip.size if sheet.column(idx_col).width < model.send(col).to_s.strip.size
+              sheet.column(idx_col).width = model.send(col).to_s.strip.size if (col.is_a?(Symbol) || col.is_a?(String)) && !model.send(col).nil? && sheet.column(idx_col).width < model.send(col).to_s.strip.size
             end
           end
           row = sheet.row(row_index)
