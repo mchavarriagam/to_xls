@@ -11,7 +11,7 @@ end
 if defined?(ActiveRecord::Relation)
   class ActiveRecord::Relation
     def to_xls(options = {})
-      self.all.to_xls(options)
+      self.to_a.to_xls(options)
     end
   end
 end
