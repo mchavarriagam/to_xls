@@ -49,7 +49,8 @@ module ToXls
         @array.each do |model|
           if @options.has_key?(:fixed_columns) && @options[:fixed_columns]
             columns.each_with_index do |col, idx_col|
-              sheet.column(idx_col).width = model.send(col).to_s.strip.size if (col.is_a?(Symbol) || col.is_a?(String)) && !model.send(col).nil? && sheet.column(idx_col).width < model.send(col).to_s.strip.size
+              column_size = model_column_to_s(model.send(col)).strip.size
+              sheet.column(idx_col).width = column_size if (col.is_a?(Symbol) || col.is_a?(String)) && !model.send(col).nil? && sheet.column(idx_col).width < column_size
             end
           end
           row = sheet.row(row_index)
@@ -90,6 +91,10 @@ module ToXls
     end
 
 private
+
+    def model_column_to_s(model_column)
+      model_column.try(:to_fs) || model_column.try(:to_s)
+    end
 
     def apply_format_to_row(row, format)
       row.default_format = format if format
